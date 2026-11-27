@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>国際交流コンサート Vol.12</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&family=Noto+Sans+JP:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,600;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: 格調ある演奏会の招待状。やさしく丁寧に。
+   IDEA: 夜の舞台に掲げられた日米の国旗 — チラシと同じ世界観
+   PICTURE: たなびく国旗の上に立つドイル夫妻（ヒーロー）、申込ページはフォーム自体
+   COLOUR and TYPE: 夜の紺 / 金 / 旗の赤。しっぽり明朝の見出し＋Noto Sans JP本文
+   LAYOUT: 紺のヒーロー → 明るい本文帯 → 紺のフッター。申込は1カラム */
+:root{color-scheme:light dark;
+ --bg:light-dark(#f7f3ea,#0b1030);--ink:light-dark(#1b2040,#efe9dc);--muted:light-dark(#555a70,#b9b3a6);
+ --card:light-dark(#ffffff,#141b45);--line:light-dark(#ddd5c3,#2a3266);
+ --navy:#0a0f2e;--gold:#d9b866;--gold-ink:light-dark(#8a6a22,#e8cd85);--red:light-dark(#b3203a,#ff7d8e)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 "Noto Sans JP",system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:"Shippori Mincho B1",serif;font-weight:800;line-height:1.25;text-wrap:balance;margin:0}
+h2{font-size:clamp(26px,3.4vw,36px)}
+h3{font-size:20px}
+a{color:var(--gold-ink)}
+.en{font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:600;letter-spacing:.02em}
+.wrap{max-width:1120px;margin:0 auto}
+.band{padding:clamp(40px,6vw,80px) max(5vw,18px)}
+.sec-h{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:28px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.sec-h .en{color:var(--gold-ink);font-size:20px}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:20;background:rgba(10,15,46,.94);backdrop-filter:blur(6px);border-bottom:1px solid rgba(217,184,102,.35)}
+.nav .wrap{display:flex;align-items:center;gap:8px 18px;flex-wrap:wrap;padding:10px max(5vw,18px)}
+.brand{color:#f3e7c6;text-decoration:none;font-size:18px;margin-right:auto}
+.brand b{color:#ff6b7a;font-weight:600}
+.nav a.l{color:#e9e3d4;text-decoration:none;font-size:14px;padding:8px 2px}
+.nav a.l:hover{color:var(--gold)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 22px;border-radius:2px;font:700 15px/1.2 "Noto Sans JP",sans-serif;text-decoration:none;cursor:pointer;border:1px solid var(--gold);background:linear-gradient(180deg,#f3dea0,#c9a24f);color:#1a1530}
+.btn.ghost{background:transparent;color:#f3e7c6}
+.btn:focus-visible,.nav a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #7fb3ff;outline-offset:2px}
+.nav .btn{min-height:40px;padding:8px 16px;font-size:14px}
+
+/* hero */
+.hero{position:relative;background:var(--navy);color:#f6f1e6;overflow:hidden;isolation:isolate}
+.hero .flags{position:absolute;inset:0;background:url(img/flags.jpg) center 70%/cover no-repeat;z-index:-2}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(10,15,46,.96) 0%,rgba(10,15,46,.82) 38%,rgba(10,15,46,.25) 70%,rgba(10,15,46,.35)),linear-gradient(0deg,rgba(10,15,46,.9),transparent 35%)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:end;gap:24px;padding:clamp(36px,6vw,72px) max(5vw,18px) 0;min-height:min(720px,92vh)}
+.hero .copy{padding-bottom:clamp(36px,6vw,72px)}
+.hero .vol{font-size:clamp(17px,2vw,21px);color:#f0d68f}
+.hero .vol b{color:#ff6b7a;font-weight:600}
+.hero .pre{font-family:"Shippori Mincho B1",serif;font-weight:800;color:#f0d68f;font-size:clamp(20px,2.4vw,26px);letter-spacing:.1em;margin-top:10px}
+.hero h1{font-size:clamp(46px,7.4vw,92px);line-height:1.05;letter-spacing:.02em;text-shadow:0 3px 0 #6d5119,0 8px 24px rgba(0,0,0,.6)}
+.hero .sub{display:inline-block;margin-top:16px;border-block:1px solid var(--gold);padding:6px 12px;font-family:"Shippori Mincho B1",serif;font-weight:600;font-size:clamp(15px,1.7vw,18px);background:rgba(10,15,46,.5)}
+.when{display:flex;flex-wrap:wrap;align-items:flex-end;gap:6px 22px;margin:26px 0 24px}
+.when .d{font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:600;font-size:clamp(56px,8vw,96px);line-height:.9;color:#fff;white-space:nowrap}
+.when .d small{font-size:.32em;color:#f0d68f;margin-right:4px}
+.when .dow{font:800 18px "Shippori Mincho B1",serif;background:#f0d68f;color:#1a1530;padding:2px 7px;vertical-align:.9em;margin-left:6px}
+.when .t{font-size:15px;line-height:1.6}
+.when .t strong{display:block;font:800 clamp(20px,2.6vw,26px)/1.3 "Shippori Mincho B1",serif;color:#f0d68f}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.people{position:relative;height:clamp(360px,50vw,620px);align-self:end}
+.people img{position:absolute;bottom:0;height:88%;filter:drop-shadow(0 10px 24px rgba(0,0,0,.6))}
+.people .j{right:0;height:84%;bottom:8%}
+.people .t{left:2%;height:86%}
+.plate{position:absolute;z-index:2;background:linear-gradient(180deg,#f7e2a4,#c9a24f);color:#1a1530;padding:6px 18px;font:800 16px/1.3 "Shippori Mincho B1",serif;white-space:nowrap;box-shadow:0 4px 10px rgba(0,0,0,.45);clip-path:polygon(0 0,100% 0,95% 50%,100% 100%,0 100%,5% 50%)}
+.plate span{display:block;font:500 11px "Noto Sans JP",sans-serif}
+.plate.pt{left:4%;bottom:8%}.plate.pj{right:2%;bottom:22%}
+
+/* intro */
+.intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:clamp(24px,5vw,64px);align-items:start}
+.intro h2{font-size:clamp(28px,4vw,44px)}
+.intro h2 em{font-style:normal;color:var(--red)}
+.intro p{margin:0 0 1em;max-width:62ch}
+
+/* info */
+.info{background:var(--card);border:1px solid var(--line)}
+.info dl{margin:0;display:grid;grid-template-columns:8em minmax(0,1fr)}
+.info dt,.info dd{margin:0;padding:14px 18px;border-bottom:1px solid var(--line)}
+.info dt{font-weight:700;color:var(--gold-ink)}
+.info dd:last-of-type,.info dt:last-of-type{border-bottom:0}
+.price{white-space:nowrap}
+.note{font-size:14px;color:var(--muted)}
+
+/* program */
+.prog{display:grid;gap:14px;counter-reset:p}
+.part{display:grid;grid-template-columns:72px minmax(0,1fr);gap:18px;background:var(--card);border:1px solid var(--line);padding:18px}
+.part .n{background:var(--navy);color:#f0d68f;display:flex;flex-direction:column;align-items:center;justify-content:center;font:800 30px/1 "Shippori Mincho B1",serif;height:72px}
+.part .n small{font-size:13px;margin-top:4px}
+.part:nth-child(2) .n{background:#b3203a;color:#fff}
+.part h3{margin-bottom:4px}
+.part p{margin:0}
+.part .call{color:var(--red);font-weight:700;font-size:14px}
+
+/* performers */
+.guests{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.pf{display:grid;grid-template-columns:120px minmax(0,1fr);gap:18px;background:var(--card);border:1px solid var(--line);padding:18px;align-items:start}
+.pf img{width:120px;height:150px;object-fit:cover;object-position:50% 15%;background:#1b2350}
+.pf.round img{height:120px;border-radius:50%;border:3px solid var(--gold)}
+.pf h3 small{font:500 13px "Noto Sans JP",sans-serif;color:var(--gold-ink);margin-left:6px}
+.pf .en{display:block;font-size:15px;color:var(--muted);margin-bottom:6px}
+.pf p{margin:0;font-size:15px}
+.band.wind{background:var(--navy);color:#efe9dc}
+.band.wind .sec-h{border-color:rgba(217,184,102,.35)}
+.band.wind .sec-h .en{color:#f0d68f}
+.wind-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(20px,4vw,48px)}
+.wind-grid figure{margin:0}
+.wind-grid figure img{width:100%;display:block;-webkit-mask-image:radial-gradient(ellipse 52% 54% at 50% 50%,#000 60%,transparent 100%);mask-image:radial-gradient(ellipse 52% 54% at 50% 50%,#000 60%,transparent 100%)}
+.wind-grid p{font-size:15px;margin:10px 0 0}
+.cond{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;align-items:start}
+.cond img{width:120px;height:120px;object-fit:cover;border:2px solid var(--gold)}
+.cond h3{color:#f0d68f}
+
+/* access */
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.box{background:var(--card);border:1px solid var(--line);padding:22px}
+.box h3{margin-bottom:8px}
+.box p{margin:0}
+.tel{font:700 22px "Noto Sans JP",sans-serif;white-space:nowrap}
+
+/* audition */
+.aud-hero{background:var(--navy);color:#f6f1e6;position:relative;isolation:isolate;overflow:hidden}
+.aud-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(10,15,46,.97) 40%,rgba(10,15,46,.6)),url(img/flags.jpg) center 70%/cover}
+.aud-hero h1{font-size:clamp(32px,5vw,52px)}
+.aud-hero p{max-width:60ch}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:rgba(217,184,102,.4);border:1px solid rgba(217,184,102,.4);margin-top:24px;max-width:860px}
+.facts div{background:rgba(10,15,46,.92);padding:14px 16px}
+.facts b{display:block;color:#f0d68f;font-size:13px;font-weight:500}
+.facts span{font:800 19px/1.4 "Shippori Mincho B1",serif}
+.req dl{grid-template-columns:9em minmax(0,1fr)}
+.inst{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px;padding:0;list-style:none}
+.inst li{border:1px solid var(--line);background:var(--bg);padding:2px 10px;font-size:14px;white-space:nowrap}
+form{display:grid;gap:18px;max-width:720px}
+.f{display:grid;gap:6px}
+.f label{font-weight:700;font-size:15px}
+.f label .req-m{color:var(--red);font-size:12px;margin-left:6px;font-weight:500}
+.f .hint{font-size:13px;color:var(--muted)}
+input,select{font:16px "Noto Sans JP",sans-serif;min-height:46px;padding:8px 12px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:2px;width:100%}
+.row2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.check{display:flex;gap:10px;align-items:center;font-weight:500}
+.check input{width:22px;min-height:22px;height:22px}
+.err{color:var(--red);font-size:14px;min-height:1em}
+[aria-invalid=true]{border-color:var(--red)}
+.out{display:none;margin-top:28px;max-width:860px}
+.out.on{display:block}
+.out canvas{width:100%;height:auto;border:1px solid var(--line);background:#fff;display:block}
+.acts{display:flex;flex-wrap:wrap;gap:12px;margin:14px 0}
+.btn.dark{background:var(--navy);color:#f3e7c6}
+.status{font-size:14px;color:var(--muted)}
+.send{background:var(--card);border:1px solid var(--line);padding:18px 20px;margin-top:6px}
+
+footer{background:var(--navy);color:#cfc6b6;font-size:14px}
+footer .wrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+footer b{color:#f0d68f}
+
+.view{display:none}.view.on{display:block}
+
+@media(max-width:860px){
+ .hero .wrap{grid-template-columns:minmax(0,1fr);min-height:0}
+ .people{height:min(440px,95vw);order:2}
+ .hero .copy{padding-bottom:0}
+ .intro,.guests,.wind-grid,.two,footer .wrap{grid-template-columns:minmax(0,1fr)}
+ .facts{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:600px){
+ .nav a.l{display:none}
+ .info dl,.req dl{grid-template-columns:minmax(0,1fr)}
+ .info dt{border-bottom:0;padding-bottom:0}
+ .pf{grid-template-columns:88px minmax(0,1fr)}.pf img{width:88px;height:110px}.pf.round img{height:88px}
+ .row2{grid-template-columns:minmax(0,1fr)}
+ .part{grid-template-columns:56px minmax(0,1fr)}.part .n{height:56px;font-size:24px}
+}
+@media(prefers-reduced-motion:no-preference){.people img{animation:rise .9s ease-out both}.people .j{animation-delay:.12s}@keyframes rise{from{opacity:0;transform:translateY(18px)}}}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="サイト内">
+ <div class="wrap">
+  <a class="brand en" href="#home"><b>W</b>ako’s Music Holiday Vol.12</a>
+  <a class="l" href="#about">ごあいさつ</a>
+  <a class="l" href="#program">プログラム</a>
+  <a class="l" href="#performers">出演</a>
+  <a class="l" href="#access">会場・お問合せ</a>
+  <a class="btn" href="#audition">オーディション申込</a>
+ </div>
+</nav>
+
+<!-- ============ HOME ============ -->
+<div class="view" id="v-home">
+<header class="hero" id="home">
+ <div class="flags" aria-hidden="true"></div>
+ <div class="wrap">
+  <div class="copy">
+   <div class="vol en"><b>W</b>ako’s Music Holiday Concert Vol.12</div>
+   <div class="pre">アメリカ＆日本</div>
+   <h1>国際交流<br>コンサート</h1>
+   <div class="sub">〜コミュニティの音楽文化活動を考える〜</div>
+   <div class="when">
+    <div class="d"><small>2027.</small>3/14<span class="dow">日</span></div>
+    <div class="t"><strong>13:30 開演</strong>エナジーウィズホール（三重県名張市）</div>
+   </div>
+   <div class="cta">
+    <a class="btn" href="#audition">合同演奏の出演者を募集中</a>
+    <a class="btn ghost" href="#info">公演情報を見る</a>
+   </div>
+  </div>
+  <div class="people" aria-label="ゲストのドイル夫妻">
+   <img class="j" src="img/james.webp" alt="ジェイムス・ドイル">
+   <img class="t" src="img/tracy.webp" alt="トレーシー・ドイル">
+   <div class="plate pj"><span>パーカッション</span>ジェイムス・ドイル</div>
+   <div class="plate pt"><span>フルート</span>トレーシー・ドイル</div>
+  </div>
+ </div>
+</header>
+
+<section class="band" id="about">
+ <div class="wrap intro">
+  <h2>音楽で<br>手をつなぐ<br><em>海を越えて</em></h2>
+  <div>
+   <p>このたび、アメリカ・ワシントン州タコマから、フルート奏者のトレーシー・ドイルさんと、打楽器奏者のジェイムス・ドイルさんご夫妻をお迎えして、国際交流コンサートを開催いたします。</p>
+   <p>お二人は、タコマの大学で教鞭をとるかたわら、ジュニアオーケストラをはじめとする青少年の音楽活動にも長く携わってこられました。その中で、近年、中学生・高校生や若い世代が地域の文化活動に参加する機会が少なくなっていることを、心配されています。</p>
+   <p>これは日本でも同じように感じられていることで、「もしかすると世界中で起きていることなのかもしれない」と、私たちと思いを分かち合いました。そして、お二人から「日本の中高生や若い皆さんと一緒に考えてみたい」というご提案をいただき、このコンサートが生まれました。</p>
+   <p>音楽を通して海を越えて手をつなぎ、地域の音楽文化のこれからを、皆さまと一緒に考えるひとときになれば幸いです。</p>
+  </div>
+ </div>
+</section>
+
+<section class="band" id="info" style="padding-top:0">
+ <div class="wrap">
+  <div class="sec-h"><h2>公演概要</h2><span class="en">Information</span></div>
+  <div class="info">
+   <dl>
+    <dt>日時</dt><dd>2027年（令和9年）3月14日（日）13:30 開演</dd>
+    <dt>会場</dt><dd>エナジーウィズホール<br><span class="note">三重県名張市松崎町1325-1　TEL 0595-65-3478</span></dd>
+    <dt>入場料</dt><dd>前売　一般 <span class="price">1,500円</span>／高校生以下 <span class="price">500円</span><br><span class="note">当日は各500円増し</span></dd>
+    <dt>出演</dt><dd>トレーシー・ドイル（フルート）、ジェイムス・ドイル（パーカッション）、柏木 薫（ピアノ）、菅生千穂（クラリネット）<br>ワコーズウインドオーケストラ（指揮：菅生和光）、国際交流選抜コンサートバンド</dd>
+    <dt>主催</dt><dd>ワコーズミュージックホリデイ実行委員会</dd>
+    <dt>後援（予定）</dt><dd>日本クラリネット協会、三重県吹奏楽連盟、三重県・三重県教育委員会、名張市・名張市教育委員会、伊賀市教育委員会</dd>
+   </dl>
+  </div>
+ </div>
+</section>
+
+<section class="band" id="program" style="padding-top:0">
+ <div class="wrap">
+  <div class="sec-h"><h2>プログラム</h2><span class="en">Program（予定）</span></div>
+  <div class="prog">
+   <div class="part"><div class="n">1<small>部</small></div><div><h3>合同演奏</h3><p>アメリカ国歌／君が代／わらべ唄 全楽章（兼田 敏）／海を越える握手（スーザ）</p><p class="call">参加を希望する中高生・一般の方を、オーディションで募集します。→ <a href="#audition">申込はこちら</a></p></div></div>
+   <div class="part"><div class="n">2<small>部</small></div><div><h3>ミニ・シンポジウム「地域の音楽文化の未来を語ろう」</h3><p>ホスト：菅生千穂　パネリスト：ドイル夫妻、団員有志、近隣の中高生・一般から4〜5人<br>原則として英語で話し合います（できれば音楽活動の経験がある方）。</p></div></div>
+   <div class="part"><div class="n">3<small>部</small></div><div><h3>コンサート</h3><p>トレーシー・ドイル（Fl）、ジェイムス・ドイル（Perc）、柏木 薫（Pf）、菅生千穂（Cl）<br>ワコーズウインド団員によるソロ・アンサンブル</p></div></div>
+  </div>
+ </div>
+</section>
+
+<section class="band" id="performers" style="padding-top:0">
+ <div class="wrap">
+  <div class="sec-h"><h2>出演</h2><span class="en">Performers</span></div>
+  <div class="guests">
+   <article class="pf"><img src="img/tracy.webp" alt="トレーシー・ドイル"><div><h3>トレーシー・ドイル<small>フルート</small></h3><span class="en">Tracy Doyle, flute</span><p>ピュージェット・サウンド大学音楽学部長・フルート教授。演奏・教育・地域とのつながりを大切にし、新生児の親と学生が歌をつくる「ララバイ・プロジェクト」を主導。ソロや室内楽で幅広く活躍し、日米合同の「アプリシティ・トリオ」創設メンバーとして、米国・オーストラリア・日本で演奏を重ねている。</p></div></article>
+   <article class="pf"><img src="img/james.webp" alt="ジェイムス・ドイル"><div><h3>ジェイムス・W・ドイル<small>パーカッション</small></h3><span class="en">James Doyle, percussion</span><p>太平洋岸北西部を拠点とする打楽器奏者・教育者。世界各地で演奏し、シアトル交響楽団のシリーズや「中之条ビエンナーレ」にも出演。元・米国空軍「ゴールデン・ウェスト・バンド」首席打楽器奏者。現在はピュージェット・サウンド大学で教え、パーカッション・フェスティバルを主宰。「アプリシティ・トリオ」でも活躍。</p></div></article>
+   <article class="pf round"><img src="img/kashiwagi.jpg" alt="柏木 薫"><div><h3>柏木 薫<small>ピアノ</small></h3><span class="en">Kaoru Kashiwagi, piano</span><p>東京音楽大学ピアノ科、英国王立音楽院大学院修了。欧州やジャマイカでの演奏、北欧でのピアノ指導を経て帰国。語りながら弾くアルバム『語りピアノ』や、菅生千穂（Cl）との『音の詩画集』など多数発表。</p></div></article>
+   <article class="pf round"><img src="img/sugo.jpg" alt="菅生千穂"><div><h3>菅生千穂<small>クラリネット</small></h3><span class="en">Chiho Sugo, clarinet</span><p>伊賀市生まれ。群馬大学共同教育学部准教授。国内外で演奏し、新作委嘱や彫刻・ダンスとの共演など、形にとらわれない音楽づくりに取り組む。「アプリシティ・トリオ」などでCDをリリース。日本クラリネット協会理事。</p></div></article>
+  </div>
+ </div>
+</section>
+
+<section class="band wind">
+ <div class="wrap">
+  <div class="sec-h"><h2>ワコーズウインドオーケストラ</h2><span class="en">Wako’s Wind Orchestra</span></div>
+  <div class="wind-grid">
+   <figure><img src="img/orchestra.jpg" alt="ワコーズウインドオーケストラの演奏風景"><p>2003年、菅生和光の還暦記念コンサートのために結成。その後も氏の指揮の下、全国から有志が集まり練習を重ねてきた吹奏楽団。令和元年より Wako’s Music Holiday シリーズをスタートさせ、芸術音楽から現代曲、ポピュラー作品まで、豊かな表現を求めて定期的に演奏会を開いている。</p></figure>
+   <div class="cond"><img src="img/wako.jpg" alt="菅生和光"><div><h3>指揮　菅生和光</h3><span class="en" style="color:#cfc6b6">Conductor</span><p>さまざまな音楽活動が評価され、JBA優秀指揮者賞、文化庁地域文化功労賞、三重県文化大賞、伊賀市政功労賞を受賞。日本吹奏楽指導者協会名誉会員、三重県吹奏楽連盟顧問、クラリネットプレイヤーズ三重代表、津市消防音楽隊ディレクター。日本クラリネットフェスティバルの実行委員長も務めた。伊賀市山出勝因寺住職、大僧正。</p></div></div>
+  </div>
+ </div>
+</section>
+
+<section class="band" id="access">
+ <div class="wrap">
+  <div class="sec-h"><h2>会場・お問合せ</h2><span class="en">Access &amp; Contact</span></div>
+  <div class="two">
+   <div class="box"><h3>エナジーウィズホール</h3><p>三重県名張市松崎町1325-1<br>TEL 0595-65-3478</p><p style="margin-top:10px"><a href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%A8%E3%83%8A%E3%82%B8%E3%83%BC%E3%82%A6%E3%82%A3%E3%82%BA%E3%83%9B%E3%83%BC%E3%83%AB+%E5%90%8D%E5%BC%B5%E5%B8%82%E6%9D%BE%E5%B4%8E%E7%94%BA1325-1">Googleマップで見る</a></p></div>
+   <div class="box"><h3>コンサート事務局</h3><p>ワコーズミュージックホリデイ実行委員会<br>〒518-0625 三重県名張市桔梗が丘5-8-80-1<br>ミュージックガーデン 米田眞理子方</p><p class="tel" style="margin-top:8px">TEL＆FAX 0595-66-1608</p></div>
+  </div>
+ </div>
+</section>
+</div>
+
+<!-- ============ AUDITION ============ -->
+<div class="view" id="v-audition">
+<header class="aud-hero band">
+ <div class="wrap">
+  <div class="vol en" style="color:#f0d68f">Audition</div>
+  <h1>ワコーズウインドオーケストラと一緒に、<br>舞台に立ちませんか</h1>
+  <p>国際交流コンサート第1部の合同演奏に出演する「国際交流選抜コンサートバンド」のメンバーを、オーディションで募集します。中学生・高校生から一般の方まで、どなたでも応募できます。応募された方には、コンサートの入場券を2枚さしあげます。</p>
+  <div class="facts">
+   <div><b>オーディション</b><span>2027年1月23日（土）<br>13:30〜16:30</span></div>
+   <div><b>申込締切</b><span>2027年1月12日（火）まで</span></div>
+   <div><b>本番</b><span>2027年3月14日（日）</span></div>
+  </div>
+ </div>
+</header>
+
+<section class="band req">
+ <div class="wrap">
+  <div class="sec-h"><h2>オーディション要項</h2><span class="en">Guidelines</span></div>
+  <div class="info">
+   <dl>
+    <dt>日時</dt><dd>2027年（令和9年）1月23日（土）13:30〜16:30</dd>
+    <dt>場所</dt><dd>ベルウイング武道交流館<br><span class="note">〒518-0753 三重県名張市蔵持町里2928番地　TEL 0595-62-4141</span></dd>
+    <dt>募集楽器</dt><dd>ウインドオーケストラ（吹奏楽）の次の楽器。各楽器若干名を募集します。
+     <ul class="inst"><li>Pic.＆Fl.</li><li>Ob.</li><li>B♭Cl.Ⅰ・Ⅱ・Ⅲ</li><li>Bass Cl.</li><li>A.Sax.</li><li>T.Sax.</li><li>B.Sax.</li><li>Bn.</li><li>Tp.Ⅰ・Ⅱ・Ⅲ</li><li>Hr.Ⅰ・Ⅱ・Ⅲ・Ⅳ</li><li>Tb.Ⅰ・Ⅱ・Ⅲ</li><li>Euph.</li><li>Tuba</li><li>S.Bass</li><li>Perc.（S.Dr.）</li></ul></dd>
+    <dt>課題曲</dt><dd><b>木管楽器・打楽器</b>：「海を越える握手」のトリオまでを、任意の速さで演奏します。<br><b>金管楽器・弦楽器</b>：「わらべ唄」より「あんたがたどこさ」を、任意の速さで演奏します。<br><span class="note">パートが分かれている楽器は、任意のパートで受験できます。楽譜が必要な方は、実行委員会事務局までご連絡ください。</span></dd>
+    <dt>受験資格</dt><dd>資格は問いません。ただし、演奏会に出演できる方に限ります。<br>2月14日（日）、3月7日（日）、3月13日（土）の午後に練習会があります。詳細は合格者にお知らせします。</dd>
+    <dt>受験料</dt><dd>中高生 <span class="price">500円</span>／一般 <span class="price">1,500円</span>（当日ご持参ください）</dd>
+    <dt>申込方法</dt><dd>2027年1月12日（火）までに、申込書を実行委員会事務局へ<b>郵送またはFAX</b>でお送りください。当日の詳細は、締め切り後に文書でお知らせします。</dd>
+    <dt>申込先</dt><dd>ワコーズミュージックホリデイ実行委員会<br>〒518-0625 三重県名張市桔梗が丘5-8-80-1 ミュージックガーデン 米田眞理子方<br><span class="tel" style="font-size:18px">TEL＆FAX 0595-66-1608</span></dd>
+   </dl>
+  </div>
+ </div>
+</section>
+
+<section class="band" id="apply" style="padding-top:0">
+ <div class="wrap">
+  <div class="sec-h"><h2>申込書をつくる</h2><span class="en">Application</span></div>
+  <p style="max-width:62ch;margin-top:0">下のフォームに入力すると、オーディション申込書ができあがります。保存した申込書を印刷して、<b>郵送またはFAX（0595-66-1608）</b>で事務局へお送りください。<br><span class="note">入力した内容は、このページの中だけで使われます。どこにも送信・保存されません。</span></p>
+  <form id="f" novalidate>
+   <div class="row2">
+    <div class="f"><label for="inst">応募楽器<span class="req-m">必須</span></label>
+     <select id="inst" required><option value="">選んでください</option></select><div class="err" id="e-inst"></div></div>
+    <div class="f"><label for="part">希望パート</label><input id="part" placeholder="例：2nd、Ⅲ など"><div class="hint">パートが分かれている楽器のみ</div></div>
+   </div>
+   <div class="row2">
+    <div class="f"><label for="name">氏名<span class="req-m">必須</span></label><input id="name" required autocomplete="name"><div class="err" id="e-name"></div></div>
+    <div class="f"><label for="kana">ふりがな</label><input id="kana"></div>
+   </div>
+   <div class="f"><label for="aff">所属・学校・学年<span class="req-m">必須</span></label><input id="aff" required placeholder="例：〇〇中学校 2年 吹奏楽部／一般"><div class="err" id="e-aff"></div></div>
+   <label class="check"><input type="checkbox" id="minor"> 未成年です（保護者の同意が必要です）</label>
+   <div class="f" id="g-guard" hidden><label for="guard">保護者氏名<span class="req-m">必須</span></label><input id="guard"><div class="hint">申込書を印刷したあと、保護者の方が自署欄にご署名ください。</div><div class="err" id="e-guard"></div></div>
+   <div class="row2">
+    <div class="f"><label for="zip">郵便番号<span class="req-m">必須</span></label><input id="zip" required inputmode="numeric" autocomplete="postal-code" placeholder="518-0000"><div class="err" id="e-zip"></div></div>
+    <div class="f"><label for="tel">電話番号<span class="req-m">必須</span></label><input id="tel" required inputmode="tel" autocomplete="tel"><div class="err" id="e-tel"></div></div>
+   </div>
+   <div class="f"><label for="addr">住所<span class="req-m">必須</span></label><input id="addr" required autocomplete="street-address"><div class="err" id="e-addr"></div></div>
+   <div class="f"><label for="mail">メールアドレス</label><input id="mail" type="email" inputmode="email" autocomplete="email"><div class="err" id="e-mail"></div></div>
+   <div><button class="btn dark" type="submit">申込書をつくる</button></div>
+  </form>
+
+  <div class="out" id="out" aria-live="polite">
+   <h3>申込書ができました</h3>
+   <p class="note">内容を確認して、保存してください。</p>
+   <div class="acts">
+    <button class="btn" type="button" id="save" hidden>申込書を保存（画像）</button>
+    <button class="btn ghost" type="button" id="copy" style="color:var(--ink)">申込内容をコピー</button>
+    <button class="btn ghost" type="button" id="edit" style="color:var(--ink)">入力を直す</button>
+   </div>
+   <p class="status" id="st"></p>
+   <canvas id="cv" width="1240" height="1754" aria-label="オーディション申込書のプレビュー"></canvas>
+   <div class="send"><b>送り先</b>　ワコーズミュージックホリデイ実行委員会<br>郵送：〒518-0625 三重県名張市桔梗が丘5-8-80-1 ミュージックガーデン 米田眞理子方<br>FAX：<span class="tel" style="font-size:18px">0595-66-1608</span>　<span class="note">締切 2027年1月12日（火）</span></div>
+  </div>
+ </div>
+</section>
+</div>
+
+<footer class="band">
+ <div class="wrap">
+  <div><div class="en" style="color:#f0d68f;font-size:18px"><b style="color:#ff6b7a">W</b>ako’s Music Holiday Concert Vol.12</div>アメリカ＆日本 国際交流コンサート<br>2027年3月14日（日）13:30開演　エナジーウィズホール</div>
+  <div><b>お問合せ</b><br>ワコーズミュージックホリデイ実行委員会 コンサート事務局<br>TEL＆FAX 0595-66-1608</div>
+ </div>
+</footer>
+
+<script>
+{
+const INST=["Pic.＆Fl.","Ob.","B♭Cl.","Bass Cl.","A.Sax.","T.Sax.","B.Sax.","Bn.","Tp.","Hr.","Tb.","Euph.","Tuba","S.Bass","Perc.（S.Dr.）"];
+const sel=document.getElementById('inst');
+INST.forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;sel.appendChild(o)});
+
+// --- routing ---
+const homeIds=['home','about','info','program','performers','access'];
+function route(){
+ const h=(location.hash||'#home').slice(1);
+ const aud=(h==='audition'||h==='apply');
+ document.getElementById('v-home').classList.toggle('on',!aud);
+ document.getElementById('v-audition').classList.toggle('on',aud);
+ if(aud&&h==='audition')window.scrollTo(0,0);
+ else if(!aud&&h==='home')window.scrollTo(0,0);
+ else{const el=document.getElementById(h);if(el)el.scrollIntoView();}
+}
+window.addEventListener('hashchange',route);route();
+
+// --- form ---
+const $=id=>document.getElementById(id);
+const minor=$('minor');
+minor.addEventListener('change',()=>{$('g-guard').hidden=!minor.checked});
+try{const d=JSON.parse(localStorage.getItem('wmh12-draft')||'null');if(d){for(const k in d){const el=$(k);if(!el)continue;if(el.type==='checkbox')el.checked=d[k];else el.value=d[k]}$('g-guard').hidden=!minor.checked}}catch(e){}
+const FIELDS=['inst','part','name','kana','aff','minor','guard','zip','tel','addr','mail'];
+$('f').addEventListener('input',()=>{try{const d={};FIELDS.forEach(k=>{const el=$(k);d[k]=el.type==='checkbox'?el.checked:el.value});localStorage.setItem('wmh12-draft',JSON.stringify(d))}catch(e){}});
+
+function val(){
+ let ok=true;
+ const need=[['inst','楽器を選んでください'],['name','氏名を入力してください'],['aff','所属・学校・学年を入力してください'],['zip','郵便番号を入力してください'],['tel','電話番号を入力してください'],['addr','住所を入力してください']];
+ if(minor.checked)need.push(['guard','保護者氏名を入力してください']);
+ ['inst','name','aff','zip','tel','addr','guard','mail'].forEach(k=>{$('e-'+k).textContent='';$(k).removeAttribute('aria-invalid')});
+ let first=null;
+ need.forEach(([k,m])=>{if(!$(k).value.trim()){$('e-'+k).textContent=m;$(k).setAttribute('aria-invalid','true');ok=false;first=first||$(k)}});
+ const m=$('mail').value.trim();
+ if(m&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)){$('e-mail').textContent='メールアドレスの形を確認してください';$('mail').setAttribute('aria-invalid','true');ok=false;first=first||$('mail')}
+ if(first)first.focus();
+ return ok;
+}
+function data(){
+ const g=k=>$(k).value.trim();
+ const now=new Date();
+ return {date:`令和${now.getFullYear()-2018}年${now.getMonth()+1}月${now.getDate()}日`,inst:g('inst'),part:g('part'),name:g('name'),kana:g('kana'),aff:g('aff'),minor:minor.checked,guard:minor.checked?g('guard'):'',zip:g('zip'),tel:g('tel'),addr:g('addr'),mail:g('mail')};
+}
+function wrapText(c,t,x,y,w,lh){let line='';for(const ch of t){if(c.measureText(line+ch).width>w){c.fillText(line,x,y);y+=lh;line=ch}else line+=ch}if(line)c.fillText(line,x,y);return y}
+async function draw(d){
+ try{await document.fonts.load('700 40px "Shippori Mincho B1"');await document.fonts.load('400 28px "Noto Sans JP"')}catch(e){}
+ const c=$('cv').getContext('2d');const W=1240,H=1754;
+ c.fillStyle='#fff';c.fillRect(0,0,W,H);c.fillStyle='#111';c.strokeStyle='#111';c.textBaseline='alphabetic';
+ const S='"Noto Sans JP",sans-serif',M='"Shippori Mincho B1",serif';
+ c.font='500 26px '+S;c.fillText("Wako's Music Holiday Concert Vol.12　アメリカ＆日本 国際交流コンサート",100,140);
+ c.font='800 60px '+M;c.textAlign='center';c.fillText('オーディション申込書',W/2,250);c.textAlign='right';
+ c.font='400 28px '+S;c.fillText('申込日　'+d.date,W-100,320);c.textAlign='left';
+ const X=100,TW=W-200,LW=300;let y=360;
+ const rows=[
+  ['応募楽器名・パート',[d.inst+(d.part?'　（希望パート：'+d.part+'）':'')],110],
+  ['受験者氏名',[d.name+(d.kana?'　（'+d.kana+'）':'')],110],
+  ['所属・学校・学年',[d.aff],110],
+  ['保護者氏名（自署）\n※未成年の方',[d.minor?d.guard:'（成年のため不要）','自署：'],170],
+  ['住所',['〒'+d.zip,d.addr],150],
+  ['電話番号',[d.tel],100],
+  ['メールアドレス',[d.mail||'—'],100]];
+ c.lineWidth=2;
+ rows.forEach(([lab,vals,h])=>{
+  c.strokeRect(X,y,TW,h);c.beginPath();c.moveTo(X+LW,y);c.lineTo(X+LW,y+h);c.stroke();
+  c.fillStyle='#f1ede4';c.fillRect(X+1,y+1,LW-2,h-2);c.fillStyle='#111';
+  c.font='700 26px '+S;lab.split('\n').forEach((l,i)=>{c.font=(i?'400 22px ':'700 26px ')+S;c.fillText(l,X+20,y+46+i*34)});
+  c.font='400 32px '+S;let yy=y+52;
+  vals.forEach(v=>{if(v==='自署：'){c.font='400 24px '+S;c.fillStyle='#666';c.fillText('保護者自署：',X+LW+24,y+h-30);c.beginPath();c.moveTo(X+LW+180,y+h-24);c.lineTo(X+TW-30,y+h-24);c.lineWidth=1;c.stroke();c.lineWidth=2;c.fillStyle='#111'}else{yy=wrapText(c,v,X+LW+24,yy,TW-LW-48,42)+46}});
+  y+=h;
+ });
+ y+=70;c.font='700 28px '+S;c.fillText('オーディション',X,y);
+ c.font='400 25px '+S;
+ ['日時：2027年1月23日（土）13:30〜16:30','場所：ベルウイング武道交流館（三重県名張市蔵持町里2928番地）','受験料：中高生 500円／一般 1,500円（当日持参）','練習会：2月14日（日）、3月7日（日）、3月13日（土）午後','申込締切：2027年1月12日（火）'].forEach((t,i)=>c.fillText(t,X,y+48+i*40));
+ y+=48+5*40+40;
+ c.fillStyle='#0a0f2e';c.fillRect(X,y,TW,150);c.fillStyle='#f0d68f';c.font='700 28px '+S;c.fillText('送り先　ワコーズミュージックホリデイ実行委員会',X+30,y+50);
+ c.fillStyle='#fff';c.font='400 24px '+S;c.fillText('〒518-0625 三重県名張市桔梗が丘5-8-80-1 ミュージックガーデン 米田眞理子方',X+30,y+90);
+ c.font='700 30px '+S;c.fillText('TEL＆FAX 0595-66-1608',X+30,y+132);
+}
+function text(d){return ['【オーディション申込書】Wako\'s Music Holiday Vol.12','申込日：'+d.date,'応募楽器：'+d.inst+(d.part?'（希望パート：'+d.part+'）':''),'氏名：'+d.name+(d.kana?'（'+d.kana+'）':''),'所属・学校・学年：'+d.aff,d.minor?'保護者氏名：'+d.guard:'','住所：〒'+d.zip+' '+d.addr,'電話番号：'+d.tel,d.mail?'メール：'+d.mail:''].filter(Boolean).join('\n')}
+let cur=null;
+$('f').addEventListener('submit',async e=>{e.preventDefault();if(!val())return;cur=data();await draw(cur);$('out').classList.add('on');$('st').textContent='';$('out').scrollIntoView({behavior:'smooth'})});
+$('edit').addEventListener('click',()=>{$('f').scrollIntoView({behavior:'smooth'});$('name').focus()});
+$('copy').addEventListener('click',async()=>{if(!cur)return;try{await navigator.clipboard.writeText(text(cur));$('st').textContent='申込内容をコピーしました。'}catch(e){$('st').textContent='コピーできませんでした。お手数ですが画面の内容を書き写してください。'}});
+let dl=null;
+(async()=>{try{dl=await window.claude?.use?.('downloads')}catch(e){dl=null}if(dl)$('save').hidden=false})();
+$('save').addEventListener('click',()=>{if(!dl||!cur)return;$('cv').toBlob(async b=>{try{await dl.save({filename:'オーディション申込書_'+cur.name.replace(/[\\/:*?"<>|\s]/g,'')+'.png',data:b});$('st').textContent='申込書を保存しました。印刷して郵送またはFAXでお送りください。'}catch(e){$('st').textContent='保存できませんでした。もう一度お試しください。'}},'image/png')});
+}
+</script>
+</body>
+</html>
